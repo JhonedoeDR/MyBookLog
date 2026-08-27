@@ -18,7 +18,7 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 
-// HTMLの要素を取得
+// HTMLの要素
 const bookList = document.getElementById("book-list");
 const emptyMessage = document.getElementById("empty-message");
 
@@ -27,7 +27,7 @@ const createButton = document.getElementById("create-button");
 const settingsButton = document.getElementById("settings-button");
 
 
-// 新規作成ページへ移動
+// ページ移動
 newButton.addEventListener("click", () => {
   window.location.href = "new.html";
 });
@@ -36,8 +36,6 @@ createButton.addEventListener("click", () => {
   window.location.href = "new.html";
 });
 
-
-// 設定ページへ移動
 settingsButton.addEventListener("click", () => {
   window.location.href = "settings.html";
 });
@@ -46,38 +44,43 @@ settingsButton.addEventListener("click", () => {
 // ログイン状態を確認
 onAuthStateChanged(auth, async (user) => {
 
-  // ログインしていない場合
+  // ログインしていない
   if (!user) {
     window.location.href = "login.html";
     return;
   }
 
 
-  // ログインしている場合
   try {
 
+    // Firestoreの「books」を取得
     const booksRef = collection(db, "books");
 
+
+    // 今ログインしているユーザーのデータだけ取得
     const q = query(
-  booksRef,
-  where("userId", "==", user.uid)
-);
+      booksRef,
+      where("userId", "==", user.uid)
+    );
+
 
     const snapshot = await getDocs(q);
 
 
-    // 読書メモが0件の場合
+    // データが0件
     if (snapshot.empty) {
+
       emptyMessage.style.display = "block";
+
       return;
     }
 
 
-    // 「まだ読書メモがありません」を非表示
+    // 「まだ読書メモがありません」を消す
     emptyMessage.style.display = "none";
 
 
-    // 取得したデータをカードにする
+    // 取得したデータを表示
     snapshot.forEach((doc) => {
 
       const book = doc.data();
@@ -85,6 +88,7 @@ onAuthStateChanged(auth, async (user) => {
       const card = document.createElement("article");
 
       card.className = "book-card";
+
 
       card.innerHTML = `
         <h3>${book.title || "作品名なし"}</h3>
@@ -103,7 +107,10 @@ onAuthStateChanged(auth, async (user) => {
 
       // カードを押したら詳細ページへ
       card.addEventListener("click", () => {
-        window.location.href = `detail.html?id=${doc.id}`;
+
+        window.location.href =
+          `detail.html?id=${doc.id}`;
+
       });
 
 
@@ -113,10 +120,29 @@ onAuthStateChanged(auth, async (user) => {
 
   } catch (error) {
 
-    console.error("読書メモの取得に失敗しました:", error);
+    // コンソールにも詳細を出す
+    console.error("Firestore読み込みエラー");
+    console.error("エラーコード:", error.code);
+    console.error("エラーメッセージ:", error.message);
+    console.error("エラー全体:", error);
 
-    bookList.textContent =
-      "読書メモを読み込めませんでした。";
+
+    // 画面にも詳細を出す
+    emptyMessage.style.display = "none";
+
+    bookList.innerHTML = `
+      <p>
+        読書メモを読み込めませんでした。
+      </p>
+
+      <p>
+        エラーコード：${error.code || "不明"}
+      </p>
+
+      <p>
+        エラーメッセージ：${error.message || "不明"}
+      </p>
+    `;
 
   }
 
