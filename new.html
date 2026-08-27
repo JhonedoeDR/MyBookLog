@@ -22,24 +22,57 @@
 
     <form id="book-form">
 
+      <!-- 作品名 -->
       <div>
         <label for="title">作品名</label>
         <input type="text" id="title" required>
       </div>
 
 
+      <!-- 著者 -->
       <div>
         <label for="author">著者・作者</label>
         <input type="text" id="author">
       </div>
 
 
-      <div>
-        <label for="genre">ジャンル</label>
-        <input type="text" id="genre">
-      </div>
+      <!-- ジャンル -->
+      <fieldset>
+        <legend>ジャンル</legend>
+
+        <label>
+          <input type="checkbox" name="genre" value="ゲーム">
+          ゲーム
+        </label>
+
+        <label>
+          <input type="checkbox" name="genre" value="ドラマ">
+          ドラマ
+        </label>
+
+        <label>
+          <input type="checkbox" name="genre" value="映画">
+          映画
+        </label>
+
+        <label>
+          <input type="checkbox" name="genre" value="アニメ">
+          アニメ
+        </label>
+
+        <label>
+          <input type="checkbox" name="genre" value="小説">
+          小説
+        </label>
+
+        <label>
+          <input type="checkbox" name="genre" value="その他">
+          その他
+        </label>
+      </fieldset>
 
 
+      <!-- 進捗 -->
       <div>
         <label for="status">進捗</label>
 
@@ -51,10 +84,42 @@
       </div>
 
 
-      <div>
-        <label for="memo">メモ</label>
-        <textarea id="memo"></textarea>
-      </div>
+      <!-- メモ -->
+      <section>
+
+        <h2>メモ</h2>
+
+        <div id="memo-list">
+
+          <!-- 最初のメモ -->
+          <div class="memo-item">
+
+            <input
+              type="text"
+              class="memo-label"
+              value="メモ"
+              placeholder="メモのタイトル"
+            >
+
+            <textarea
+              class="memo-content"
+              placeholder="内容"
+            ></textarea>
+
+            <button type="button" class="delete-memo-button">
+              このメモを削除
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <button type="button" id="add-memo-button">
+          ＋ メモを追加
+        </button>
+
+      </section>
 
 
       <button type="submit">
