@@ -1,55 +1,70 @@
 <!DOCTYPE html>
 <html lang="ja">
-
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ログイン│よみもの記録</title>
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ログイン│よみもの記録</title>
-  
-  <!-- アイコン -->
+<!-- Google Fonts -->
+<link
+  rel="preconnect"
+  href="https://fonts.googleapis.com"
+>
+<link
+  href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap"
+  rel="stylesheet"
+>
+
+<!-- アイコン -->
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#14518c">
 
-
+<!-- このページ専用CSS -->
+<link rel="stylesheet" href="login.css">
 </head>
-
-
-
 <body>
+<div class="frame">
 
+  <header>
+    <div class="brand">
+      よみもの記録
+      <span>READING NOTES</span>
+    </div>
+  </header>
 
-<main>
-  <h1>作品記録</h1>
+  <main>
+    <p class="login-lead">作品記録にログイン</p>
 
-  <form id="login-form">
-    <label for="email">メールアドレス</label>
-    <input type="email" id="email" required>
+    <form id="login-form">
+      <div class="form-group">
+        <label for="email">メールアドレス</label>
+        <input type="email" id="email" required>
+      </div>
 
-    <label for="password">パスワード</label>
-    <input type="password" id="password" required>
+      <div class="form-group">
+        <label for="password">パスワード</label>
+        <input type="password" id="password" required>
+      </div>
 
-    <button type="submit" id="login-button">ログイン</button>
-  </form>
+      <button type="submit" id="login-button">
+        ログイン
+      </button>
+    </form>
 
-  <p id="error-message"></p>
+    <p id="error-message"></p>
 
-  <p>
-    アカウントをお持ちでないですか?
-    <button type="button" id="signup-button">アカウントを作成する</button>
-  </p>
-</main>
-
-
+    <p>
+      アカウントをお持ちでないですか?
+      <button type="button" id="signup-button">
+        アカウントを作成する
+      </button>
+    </p>
+  </main>
+</div>
 
 <script type="module" src="login.js"></script>
-
-
 </body>
-
-
 </html>
