@@ -15,29 +15,132 @@
     </button>
   </header>
 
-
   <main>
 
-    <h1 id="title">読み込み中...</h1>
+    <!-- 表示モード -->
+    <section id="view-mode">
 
-    <p id="author"></p>
+      <h1 id="title">読み込み中...</h1>
 
-    <div>
-      <h2>ジャンル</h2>
-      <p id="genre"></p>
-    </div>
+      <p id="author"></p>
 
-    <div>
-      <h2>進捗</h2>
-      <p id="status"></p>
-    </div>
+      <div>
+        <h2>ジャンル</h2>
+        <p id="genre"></p>
+      </div>
+
+      <div>
+        <h2>進捗</h2>
+        <p id="status"></p>
+      </div>
+
+      <section>
+        <h2>メモ</h2>
+        <div id="memo-list"></div>
+      </section>
+
+      <button type="button" id="edit-button">
+        編集
+      </button>
+
+      <button type="button" id="delete-button">
+        削除
+      </button>
+
+    </section>
 
 
-    <section>
+    <!-- 編集モード -->
+    <section id="edit-mode" hidden>
 
-      <h2>メモ</h2>
+      <h1>読書メモを編集</h1>
 
-      <div id="memo-list"></div>
+      <form id="edit-form">
+
+        <label for="edit-title">作品名</label>
+        <input type="text" id="edit-title" required>
+
+
+        <label for="edit-author">著者</label>
+        <input type="text" id="edit-author">
+
+
+        <fieldset>
+
+          <legend>ジャンル</legend>
+
+          <label>
+            <input type="checkbox" name="edit-genre" value="ゲーム">
+            ゲーム
+          </label>
+
+          <label>
+            <input type="checkbox" name="edit-genre" value="ドラマ">
+            ドラマ
+          </label>
+
+          <label>
+            <input type="checkbox" name="edit-genre" value="映画">
+            映画
+          </label>
+
+          <label>
+            <input type="checkbox" name="edit-genre" value="アニメ">
+            アニメ
+          </label>
+
+          <label>
+            <input type="checkbox" name="edit-genre" value="小説">
+            小説
+          </label>
+
+          <label>
+            <input type="checkbox" name="edit-genre" value="その他">
+            その他
+          </label>
+
+        </fieldset>
+
+
+        <label for="edit-status">進捗</label>
+
+        <select id="edit-status">
+
+          <option value="積読">積読</option>
+          <option value="読書中">読書中</option>
+          <option value="読了">読了</option>
+
+        </select>
+
+
+        <section>
+
+          <h2>メモ</h2>
+
+          <div id="edit-memo-list"></div>
+
+          <button
+            type="button"
+            id="add-edit-memo-button"
+          >
+            ＋ メモを追加
+          </button>
+
+        </section>
+
+
+        <button type="submit">
+          保存する
+        </button>
+
+        <button
+          type="button"
+          id="cancel-edit-button"
+        >
+          キャンセル
+        </button>
+
+      </form>
 
     </section>
 
