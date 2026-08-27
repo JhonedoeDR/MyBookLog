@@ -1,5 +1,3 @@
-console.log("index.js が読み込まれました");
-
 import { app } from "./firebase-config.js";
 
 import {
@@ -20,7 +18,6 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 
-// HTMLの要素
 const bookList = document.getElementById("book-list");
 const emptyMessage = document.getElementById("empty-message");
 
@@ -29,37 +26,68 @@ const createButton = document.getElementById("create-button");
 const settingsButton = document.getElementById("settings-button");
 
 
+// 画面に現在の状態を表示する
+bookList.innerHTML = "<p>index.jsを読み込みました。</p>";
+
+
+// ボタンの確認
+if (!newButton) {
+  bookList.innerHTML += "<p>エラー：new-button が見つかりません。</p>";
+}
+
+if (!createButton) {
+  bookList.innerHTML += "<p>エラー：create-button が見つかりません。</p>";
+}
+
+if (!settingsButton) {
+  bookList.innerHTML += "<p>エラー：settings-button が見つかりません。</p>";
+}
+
+
 // ページ移動
-newButton.addEventListener("click", () => {
-  window.location.href = "new.html";
-});
+if (newButton) {
+  newButton.addEventListener("click", () => {
+    window.location.href = "new.html";
+  });
+}
 
-createButton.addEventListener("click", () => {
-  window.location.href = "new.html";
-});
+if (createButton) {
+  createButton.addEventListener("click", () => {
+    window.location.href = "new.html";
+  });
+}
 
-settingsButton.addEventListener("click", () => {
-  window.location.href = "settings.html";
-});
+if (settingsButton) {
+  settingsButton.addEventListener("click", () => {
+    window.location.href = "settings.html";
+  });
+}
 
 
 // ログイン状態を確認
+bookList.innerHTML += "<p>ログイン状態を確認しています。</p>";
+
 onAuthStateChanged(auth, async (user) => {
 
-  // ログインしていない
   if (!user) {
+    bookList.innerHTML += "<p>ログインしていません。</p>";
     window.location.href = "login.html";
     return;
   }
 
 
+  bookList.innerHTML += "<p>ログイン確認OK。</p>";
+  bookList.innerHTML += `<p>UID：${user.uid}</p>`;
+
+
   try {
 
-    // Firestoreの「books」を取得
+    bookList.innerHTML += "<p>Firestoreを読み込んでいます。</p>";
+
+
     const booksRef = collection(db, "books");
 
 
-    // 今ログインしているユーザーのデータだけ取得
     const q = query(
       booksRef,
       where("userId", "==", user.uid)
@@ -69,7 +97,10 @@ onAuthStateChanged(auth, async (user) => {
     const snapshot = await getDocs(q);
 
 
-    // データが0件
+    bookList.innerHTML +=
+      `<p>Firestore読み込み成功。取得件数：${snapshot.size}</p>`;
+
+
     if (snapshot.empty) {
 
       emptyMessage.style.display = "block";
@@ -78,11 +109,12 @@ onAuthStateChanged(auth, async (user) => {
     }
 
 
-    // 「まだ読書メモがありません」を消す
     emptyMessage.style.display = "none";
 
+    // 状態確認用の文章を消して、カード表示にする
+    bookList.innerHTML = "";
 
-    // 取得したデータを表示
+
     snapshot.forEach((doc) => {
 
       const book = doc.data();
@@ -90,7 +122,6 @@ onAuthStateChanged(auth, async (user) => {
       const card = document.createElement("article");
 
       card.className = "book-card";
-
 
       card.innerHTML = `
         <h3>${book.title || "作品名なし"}</h3>
@@ -107,12 +138,9 @@ onAuthStateChanged(auth, async (user) => {
       `;
 
 
-      // カードを押したら詳細ページへ
       card.addEventListener("click", () => {
-
         window.location.href =
           `detail.html?id=${doc.id}`;
-
       });
 
 
@@ -120,29 +148,26 @@ onAuthStateChanged(auth, async (user) => {
 
     });
 
+
   } catch (error) {
 
-    // コンソールにも詳細を出す
-    console.error("Firestore読み込みエラー");
-    console.error("エラーコード:", error.code);
-    console.error("エラーメッセージ:", error.message);
-    console.error("エラー全体:", error);
+    console.error("Firestore読み込みエラー:", error);
 
 
-    // 画面にも詳細を出す
     emptyMessage.style.display = "none";
 
+
     bookList.innerHTML = `
+      <p>Firestoreの読み込みでエラーが発生しました。</p>
+
       <p>
-        読書メモを読み込めませんでした。
+        エラーコード：
+        ${error.code || "なし"}
       </p>
 
       <p>
-        エラーコード：${error.code || "不明"}
-      </p>
-
-      <p>
-        エラーメッセージ：${error.message || "不明"}
+        エラーメッセージ：
+        ${error.message || "なし"}
       </p>
     `;
 
