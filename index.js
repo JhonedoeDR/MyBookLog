@@ -1,3 +1,5 @@
+console.log("index.js が読み込まれました");
+
 import { app } from "./firebase-config.js";
 
 import {
