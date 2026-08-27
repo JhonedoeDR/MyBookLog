@@ -19,8 +19,9 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 
-// 表示
+// HTML
 const viewMode = document.getElementById("view-mode");
+const editMode = document.getElementById("edit-mode");
 
 const titleElement = document.getElementById("title");
 const authorElement = document.getElementById("author");
@@ -28,130 +29,138 @@ const genreElement = document.getElementById("genre");
 const statusElement = document.getElementById("status");
 const memoList = document.getElementById("memo-list");
 
-
-// 編集
-const editMode = document.getElementById("edit-mode");
-const editForm = document.getElementById("edit-form");
-
 const editTitle = document.getElementById("edit-title");
 const editAuthor = document.getElementById("edit-author");
 const editStatus = document.getElementById("edit-status");
+const editMemoList = document.getElementById("edit-memo-list");
 
-const editMemoList =
-  document.getElementById("edit-memo-list");
+const editForm = document.getElementById("edit-form");
 
+const backButton = document.getElementById("back-button");
+const editButton = document.getElementById("edit-button");
+const deleteButton = document.getElementById("delete-button");
+const cancelEditButton = document.getElementById("cancel-edit-button");
+const addEditMemoButton = document.getElementById("add-edit-memo-button");
 
-// ボタン
-const backButton =
-  document.getElementById("back-button");
-
-const editButton =
-  document.getElementById("edit-button");
-
-const deleteButton =
-  document.getElementById("delete-button");
-
-const cancelEditButton =
-  document.getElementById("cancel-edit-button");
-
-const addEditMemoButton =
-  document.getElementById("add-edit-memo-button");
-
-
-// エラー
-const errorMessage =
-  document.getElementById("error-message");
+const errorMessage = document.getElementById("error-message");
 
 
 // URLから作品IDを取得
-const params =
-  new URLSearchParams(window.location.search);
-
+const params = new URLSearchParams(window.location.search);
 const bookId = params.get("id");
 
-
-// 現在の作品データ
 let currentBook = null;
 
 
-// ホームに戻る
-backButton.addEventListener("click", () => {
+// ホームへ戻る
+backButton.onclick = () => {
   window.location.href = "index.html";
-});
+};
 
 
-// メモを編集画面に追加
+// メモ入力欄を追加
 function addMemoEditor(label = "", content = "") {
 
-  const memoItem =
-    document.createElement("div");
+  const item = document.createElement("div");
 
-  memoItem.className = "edit-memo-item";
+  item.className = "edit-memo-item";
 
-  memoItem.innerHTML = `
-    <input
-      type="text"
-      class="edit-memo-label"
-      placeholder="メモのタイトル"
-      value="${label.replace(/"/g, "&quot;")}"
-    >
+  const labelInput = document.createElement("input");
+  labelInput.type = "text";
+  labelInput.className = "edit-memo-label";
+  labelInput.placeholder = "メモのタイトル";
+  labelInput.value = label;
 
-    <textarea
-      class="edit-memo-content"
-      placeholder="内容"
-    >${content}</textarea>
+  const contentInput = document.createElement("textarea");
+  contentInput.className = "edit-memo-content";
+  contentInput.placeholder = "内容";
+  contentInput.value = content;
 
-    <button
-      type="button"
-      class="delete-edit-memo-button"
-    >
-      このメモを削除
-    </button>
-  `;
+  const deleteButton = document.createElement("button");
+  deleteButton.type = "button";
+  deleteButton.textContent = "このメモを削除";
 
-  editMemoList.appendChild(memoItem);
+  deleteButton.onclick = () => {
+    item.remove();
+  };
+
+  item.appendChild(labelInput);
+  item.appendChild(contentInput);
+  item.appendChild(deleteButton);
+
+  editMemoList.appendChild(item);
 }
 
 
 // メモ追加
-addEditMemoButton.addEventListener("click", () => {
+addEditMemoButton.onclick = () => {
   addMemoEditor();
-});
+};
 
 
-// メモ削除
-editMemoList.addEventListener("click", (event) => {
+// 詳細表示
+function displayBook(book) {
+
+  titleElement.textContent =
+    book.title || "作品名なし";
+
+  authorElement.textContent =
+    "著者：" + (book.author || "不明");
+
+  genreElement.textContent =
+    Array.isArray(book.genre) && book.genre.length > 0
+      ? book.genre.join(" / ")
+      : "未設定";
+
+  statusElement.textContent =
+    book.status || "未設定";
+
+
+  memoList.innerHTML = "";
+
 
   if (
-    !event.target.classList.contains(
-      "delete-edit-memo-button"
-    )
+    !Array.isArray(book.memoSections) ||
+    book.memoSections.length === 0
   ) {
+
+    memoList.innerHTML =
+      "<p>メモはありません。</p>";
+
     return;
   }
 
-  const memoItem =
-    event.target.closest(".edit-memo-item");
 
-  memoItem.remove();
+  book.memoSections.forEach((memo) => {
 
-});
+    const article = document.createElement("article");
+
+    const h3 = document.createElement("h3");
+    h3.textContent = memo.label || "無題";
+
+    const p = document.createElement("p");
+    p.textContent = memo.content || "";
+
+    article.appendChild(h3);
+    article.appendChild(p);
+
+    memoList.appendChild(article);
+
+  });
+
+}
 
 
-// 編集ボタン
-editButton.addEventListener("click", () => {
-  console.log("編集ボタンが押されました");
+// 編集画面を開く
+editButton.onclick = () => {
 
   if (!currentBook) {
-    errorMessage.textContent = "作品データがまだ読み込まれていません。";
+    errorMessage.textContent =
+      "作品データを読み込んでいます。";
     return;
   }
 
-  // 以下、今までの編集処理
-});
 
-
-  // 現在の内容を入力欄に入れる
   editTitle.value =
     currentBook.title || "";
 
@@ -162,7 +171,6 @@ editButton.addEventListener("click", () => {
     currentBook.status || "積読";
 
 
-  // ジャンル
   document
     .querySelectorAll('input[name="edit-genre"]')
     .forEach((checkbox) => {
@@ -174,8 +182,8 @@ editButton.addEventListener("click", () => {
     });
 
 
-  // メモ
   editMemoList.innerHTML = "";
+
 
   if (Array.isArray(currentBook.memoSections)) {
 
@@ -191,30 +199,25 @@ editButton.addEventListener("click", () => {
   }
 
 
-  // 表示を編集モードに変更
   viewMode.hidden = true;
   editMode.hidden = false;
 
-});
+};
 
 
-// キャンセル
-cancelEditButton.addEventListener("click", () => {
+// 編集をキャンセル
+cancelEditButton.onclick = () => {
 
   editMode.hidden = true;
   viewMode.hidden = false;
 
-});
+};
 
 
 // 編集内容を保存
-editForm.addEventListener("submit", async (event) => {
+editForm.onsubmit = async (event) => {
 
   event.preventDefault();
-
-  if (!currentBook) {
-    return;
-  }
 
 
   try {
@@ -234,22 +237,16 @@ editForm.addEventListener("submit", async (event) => {
 
         return {
           label:
-            item
-              .querySelector(".edit-memo-label")
-              .value
-              .trim(),
+            item.querySelector(".edit-memo-label").value.trim(),
 
           content:
-            item
-              .querySelector(".edit-memo-content")
-              .value
-              .trim()
+            item.querySelector(".edit-memo-content").value.trim()
         };
 
       });
 
 
-    const updatedData = {
+    const newData = {
 
       title:
         editTitle.value.trim(),
@@ -278,24 +275,21 @@ editForm.addEventListener("submit", async (event) => {
 
     await updateDoc(
       bookRef,
-      updatedData
+      newData
     );
 
 
-    // 現在のデータも更新
     currentBook = {
       ...currentBook,
-      ...updatedData
+      ...newData
     };
 
 
-    // 表示を更新
     displayBook(currentBook);
 
 
     editMode.hidden = true;
     viewMode.hidden = false;
-
 
     errorMessage.textContent =
       "保存しました。";
@@ -303,31 +297,34 @@ editForm.addEventListener("submit", async (event) => {
 
   } catch (error) {
 
-    console.error("編集保存エラー:", error);
+    console.error(error);
 
     errorMessage.textContent =
-      `保存エラー: ${error.code || "不明"} / ${error.message}`;
+      "保存エラー: " +
+      (error.code || "不明") +
+      " / " +
+      error.message;
 
   }
 
-});
+};
 
 
-// 削除
-deleteButton.addEventListener("click", async () => {
+// 作品を削除
+deleteButton.onclick = async () => {
 
   if (!currentBook) {
     return;
   }
 
 
-  const confirmed =
+  const result =
     window.confirm(
       "この読書メモを削除しますか？"
     );
 
 
-  if (!confirmed) {
+  if (!result) {
     return;
   }
 
@@ -346,95 +343,24 @@ deleteButton.addEventListener("click", async () => {
 
   } catch (error) {
 
-    console.error("削除エラー:", error);
+    console.error(error);
 
     errorMessage.textContent =
-      `削除エラー: ${error.code || "不明"} / ${error.message}`;
+      "削除エラー: " +
+      (error.code || "不明") +
+      " / " +
+      error.message;
 
   }
 
-});
+};
 
 
-// 作品を画面に表示
-function displayBook(book) {
-
-  titleElement.textContent =
-    book.title || "作品名なし";
-
-  authorElement.textContent =
-    `著者：${book.author || "不明"}`;
-
-
-  if (
-    Array.isArray(book.genre) &&
-    book.genre.length > 0
-  ) {
-
-    genreElement.textContent =
-      book.genre.join(" / ");
-
-  } else {
-
-    genreElement.textContent =
-      "未設定";
-
-  }
-
-
-  statusElement.textContent =
-    book.status || "未設定";
-
-
-  memoList.innerHTML = "";
-
-
-  if (
-    !Array.isArray(book.memoSections) ||
-    book.memoSections.length === 0
-  ) {
-
-    memoList.innerHTML =
-      "<p>メモはありません。</p>";
-
-    return;
-  }
-
-
-  book.memoSections.forEach((memo) => {
-
-    const memoElement =
-      document.createElement("article");
-
-    const memoTitle =
-      document.createElement("h3");
-
-    memoTitle.textContent =
-      memo.label || "無題";
-
-
-    const memoContent =
-      document.createElement("p");
-
-    memoContent.textContent =
-      memo.content || "";
-
-
-    memoElement.appendChild(memoTitle);
-    memoElement.appendChild(memoContent);
-
-    memoList.appendChild(memoElement);
-
-  });
-
-}
-
-
-// Firebaseから作品を読み込む
+// Firebaseから読み込む
 if (!bookId) {
 
   errorMessage.textContent =
-    "エラー：作品IDがありません。";
+    "作品IDがありません。";
 
 } else {
 
@@ -454,21 +380,21 @@ if (!bookId) {
       const bookRef =
         doc(db, "books", bookId);
 
-      const bookSnapshot =
+      const snapshot =
         await getDoc(bookRef);
 
 
-      if (!bookSnapshot.exists()) {
+      if (!snapshot.exists()) {
 
         errorMessage.textContent =
-          "この読書メモは見つかりません。";
+          "この読書メモは存在しません。";
 
         return;
       }
 
 
       const book =
-        bookSnapshot.data();
+        snapshot.data();
 
 
       if (book.userId !== user.uid) {
@@ -487,10 +413,7 @@ if (!bookId) {
 
     } catch (error) {
 
-      console.error(
-        "詳細情報の取得エラー:",
-        error
-      );
+      console.error(error);
 
       errorMessage.innerHTML = `
         <p>読み込みエラー</p>
@@ -503,5 +426,3 @@ if (!bookId) {
   });
 
 }
-
-console.log("detail.js 最後まで読み込みました");
