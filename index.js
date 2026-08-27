@@ -22,7 +22,9 @@ const bookList = document.getElementById("book-list");
 const emptyMessage = document.getElementById("empty-message");
 
 const newButton = document.getElementById("new-button");
-const createButton = document.getElementById("create-button");
+const createButton =
+  document.getElementById("create-button") ||
+  document.getElementById("btn2");
 const settingsButton = document.getElementById("settings-button");
 
 
