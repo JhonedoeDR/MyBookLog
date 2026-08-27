@@ -140,10 +140,15 @@ editMemoList.addEventListener("click", (event) => {
 
 // 編集ボタン
 editButton.addEventListener("click", () => {
+  console.log("編集ボタンが押されました");
 
   if (!currentBook) {
+    errorMessage.textContent = "作品データがまだ読み込まれていません。";
     return;
   }
+
+  // 以下、今までの編集処理
+});
 
 
   // 現在の内容を入力欄に入れる
