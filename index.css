@@ -167,6 +167,12 @@ main {
 
 /* 新しい読書メモ */
 
+.left-card {
+  display: flex;
+  justify-content: center;   /* 横方向の中央 */
+
+}
+
 #btn2 {
   cursor: pointer;
   margin: 32px;
