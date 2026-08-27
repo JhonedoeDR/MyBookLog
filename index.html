@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>読書帖 - ホーム</title>
+</head>
+
+<body>
+
+  <header>
+    <h1>読書帖</h1>
+
+    <nav>
+      <button type="button" id="new-button">＋ 新規作成</button>
+      <button type="button" id="settings-button">設定</button>
+    </nav>
+  </header>
+
+
+  <main>
+
+    <section>
+      <h2>読書メモ</h2>
+
+      <button type="button" id="create-button">
+        ＋ 新しい読書メモを作成する
+      </button>
+    </section>
+
+
+    <section>
+      <h2>最近の記録</h2>
+
+      <!-- Firestoreから取得した読書メモがここに入る -->
+      <div id="book-list"></div>
+
+      <!-- 読書メモが1件もないときに表示する -->
+      <p id="empty-message">まだ読書メモがありません。</p>
+    </section>
+
+  </main>
+
+
+  <script type="module" src="index.js"></script>
+
+</body>
+
+</html>
