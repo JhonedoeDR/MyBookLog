@@ -19,7 +19,11 @@ const db = getFirestore(app);
 
 const form = document.getElementById("book-form");
 const message = document.getElementById("message");
+
 const backButton = document.getElementById("back-button");
+
+const memoList = document.getElementById("memo-list");
+const addMemoButton = document.getElementById("add-memo-button");
 
 
 let currentUser = null;
@@ -44,10 +48,54 @@ backButton.addEventListener("click", () => {
 });
 
 
+// メモを1個追加する
+addMemoButton.addEventListener("click", () => {
+
+  const memoItem = document.createElement("div");
+
+  memoItem.className = "memo-item";
+
+  memoItem.innerHTML = `
+    <input
+      type="text"
+      class="memo-label"
+      placeholder="メモのタイトル"
+    >
+
+    <textarea
+      class="memo-content"
+      placeholder="内容"
+    ></textarea>
+
+    <button type="button" class="delete-memo-button">
+      このメモを削除
+    </button>
+  `;
+
+  memoList.appendChild(memoItem);
+
+});
+
+
+// メモ削除
+memoList.addEventListener("click", (event) => {
+
+  if (!event.target.classList.contains("delete-memo-button")) {
+    return;
+  }
+
+  const memoItem = event.target.closest(".memo-item");
+
+  memoItem.remove();
+
+});
+
+
 // 保存
 form.addEventListener("submit", async (event) => {
 
   event.preventDefault();
+
 
   if (!currentUser) {
     message.textContent = "ログインしてください。";
@@ -55,11 +103,35 @@ form.addEventListener("submit", async (event) => {
   }
 
 
-  const title = document.getElementById("title").value;
-  const author = document.getElementById("author").value;
-  const genre = document.getElementById("genre").value;
+  // 作品名
+  const title = document.getElementById("title").value.trim();
+
+
+  // 著者
+  const author = document.getElementById("author").value.trim();
+
+
+  // ジャンル
+  const genre = Array.from(
+    document.querySelectorAll('input[name="genre"]:checked')
+  ).map((input) => input.value);
+
+
+  // 進捗
   const status = document.getElementById("status").value;
-  const memo = document.getElementById("memo").value;
+
+
+  // メモ
+  const memoSections = Array.from(
+    document.querySelectorAll(".memo-item")
+  ).map((item) => {
+
+    return {
+      label: item.querySelector(".memo-label").value.trim(),
+      content: item.querySelector(".memo-content").value.trim()
+    };
+
+  });
 
 
   try {
@@ -70,18 +142,11 @@ form.addEventListener("submit", async (event) => {
 
       author: author,
 
-      genre: genre
-        ? [genre]
-        : [],
+      genre: genre,
 
       status: status,
 
-      memoSections: [
-        {
-          label: "メモ",
-          content: memo
-        }
-      ],
+      memoSections: memoSections,
 
       updatedAt: serverTimestamp(),
 
@@ -92,6 +157,7 @@ form.addEventListener("submit", async (event) => {
 
     message.textContent = "保存しました。";
 
+
     setTimeout(() => {
       window.location.href = "index.html";
     }, 500);
@@ -99,7 +165,7 @@ form.addEventListener("submit", async (event) => {
 
   } catch (error) {
 
-    console.error(error);
+    console.error("保存エラー:", error);
 
     message.textContent =
       "保存できませんでした: " + error.message;
