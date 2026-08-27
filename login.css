@@ -1,0 +1,173 @@
+:root {
+  --kurai: #14518c;
+  --choikura: #bbc8d8;
+  --main: #c59630;
+  --akarui: #eaeff3;
+}
+
+/* 全体 */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #d8d0bd;
+  color: var(--kurai);
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px 0;
+}
+
+/* 全体の枠(他ページと共通) */
+.frame {
+  width: 390px;
+  min-height: 780px;
+  background: var(--akarui);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ヘッダー(他ページと共通) */
+header {
+  background: var(--kurai);
+  color: var(--akarui);
+  padding: 22px 16px 20px;
+}
+
+.brand {
+  font-family: "Shippori Mincho", serif;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.04em;
+}
+
+.brand span {
+  display: block;
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  color: #b9c4bc;
+  margin-top: 2px;
+}
+
+/* 本文 */
+main {
+  padding: 36px 20px 32px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-lead {
+  font-family: "Shippori Mincho", serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--kurai);
+  margin: 0 2px 20px;
+}
+
+/* フォーム */
+#login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--kurai);
+  margin-bottom: 6px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--choikura);
+  border-radius: 10px;
+  background: #fff;
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-size: 14px;
+  color: var(--kurai);
+}
+
+.form-group input:focus {
+  outline: 2px solid var(--main);
+  outline-offset: 1px;
+}
+
+/* ログインボタン(indexの新規作成ボタンと同じ見た目) */
+#login-button {
+  cursor: pointer;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  background-color: var(--main);
+  color: #fff;
+  border: 1px solid black;
+  border-radius: 50px;
+  box-shadow: 4px 4px black;
+  text-align: center;
+  margin-top: 6px;
+}
+
+/* エラーメッセージ */
+#error-message {
+  margin: 14px 4px 0;
+  font-size: 12px;
+  color: #b0483f;
+  text-align: center;
+  min-height: 14px;
+}
+
+/* アカウント作成の案内 */
+main > p:last-of-type {
+  margin: 28px 2px 0;
+  font-size: 12px;
+  color: var(--kurai);
+  text-align: center;
+  border-top: 1px dashed var(--choikura);
+  padding-top: 18px;
+}
+
+#signup-button {
+  display: block;
+  margin: 10px auto 0;
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  background: #fff;
+  color: var(--kurai);
+  border: 1px solid var(--choikura);
+  border-radius: 50px;
+}
+
+/* スマホ(他ページと共通) */
+@media (max-width: 420px) {
+  body {
+    padding: 0;
+    background: var(--akarui);
+  }
+
+  .frame {
+    width: 100%;
+    min-height: 100vh;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
