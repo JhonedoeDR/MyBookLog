@@ -16,7 +16,7 @@
 body {
   margin: 0;
   background: #d8d0bd;
-  color: var(--ink);
+  color: var(--kuro);
 
   font-family:
     "Zen Kaku Gothic New",
@@ -37,7 +37,7 @@ body {
   width: 390px;
   min-height: 780px;
 
-  background: var(--paper);
+  background: var(--siro);
 
   border-radius: 28px;
   overflow: hidden;
@@ -53,8 +53,8 @@ body {
 /* ヘッダー */
 
 header {
-  background: var(--forest-deep);
-  color: var(--paper);
+  background: var(--neon);
+  color: var(--siro);
 
   padding: 18px 16px 16px;
 
@@ -104,7 +104,7 @@ header {
 /* 新規作成ボタン */
 
 .btn-new-header {
-  background: var(--brick);
+  background: var(--neon);
   color: #fff;
 
   border: none;
@@ -137,7 +137,7 @@ header {
   background:
     rgba(255, 255, 255, 0.06);
 
-  color: var(--paper);
+  color: var(--siro);
 
   display: flex;
   align-items: center;
@@ -166,12 +166,12 @@ main {
   width: 100%;
 
   border:
-    1.5px dashed var(--forest);
+    1.5px dashed var(--neon);
 
   background:
     rgba(59, 82, 73, 0.06);
 
-  color: var(--forest-deep);
+  color: var(--kuro);
 
   border-radius: 16px;
 
@@ -203,7 +203,7 @@ main {
 
   border-radius: 50%;
 
-  background: var(--forest);
+  background: var(--neon);
   color: #fff;
 
   display: flex;
@@ -225,7 +225,7 @@ main {
 
   font-size: 13px;
 
-  color: var(--ink-soft);
+  color: var(--kurosoft);
 
   letter-spacing: 0.1em;
 
@@ -249,7 +249,7 @@ main {
 /* 読書カード */
 
 .book-card {
-  background: var(--surface);
+  background: var(--haiiro);
 
   border-radius: 14px;
 
@@ -308,7 +308,7 @@ main {
   margin:
     0 12px 6px;
 
-  color: var(--ink-soft);
+  color: var(--kurosoft);
 }
 
 
@@ -326,7 +326,7 @@ main {
 
   text-align: center;
 
-  color: var(--ink-soft);
+  color: var(--kurosoft);
 
   font-size: 13px;
 
@@ -342,12 +342,12 @@ main {
 
   font-size: 11px;
 
-  color: var(--ink-soft);
+  color: var(--kurosoft);
 
   line-height: 1.6;
 
   border-top:
-    1px dashed var(--line);
+    1px dashed var(--haiiro);
 
   padding-top: 12px;
 }
@@ -359,7 +359,7 @@ main {
 
   body {
     padding: 0;
-    background: var(--paper);
+    background: var(--siro);
   }
 
   .frame {
