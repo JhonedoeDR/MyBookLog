@@ -171,7 +171,15 @@ fieldset label {
   gap: 8px;
 }
 
+/* メモの見出し行(タイトル + 開閉ボタン) */
+.memo-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .memo-item .memo-label {
+  flex: 1;
   border: 1px solid var(--choikura);
   border-radius: 8px;
   padding: 8px 10px;
@@ -179,6 +187,32 @@ fieldset label {
   font-weight: 700;
   color: var(--kurai);
   font-family: "Zen Kaku Gothic New", sans-serif;
+}
+
+/* 開閉ボタン */
+.toggle-memo-button {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--choikura);
+  background: var(--akarui);
+  color: var(--kurai);
+  font-size: 11px;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+/* メモの本文(開閉対象) */
+.memo-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 閉じているとき本文を隠す */
+.memo-item.collapsed .memo-body {
+  display: none;
 }
 
 .memo-item .memo-content {
