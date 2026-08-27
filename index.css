@@ -146,7 +146,9 @@ header {
     sans-serif;
 
   font-weight: 700;
-  font-size: 13px;
+  font-size: 10px;
+  
+  writing-mode: horizontal-tb;
   
   cursor: pointer;
 
