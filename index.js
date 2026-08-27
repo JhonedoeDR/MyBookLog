@@ -10,7 +10,6 @@ import {
   collection,
   query,
   where,
-  orderBy,
   getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
@@ -60,10 +59,9 @@ onAuthStateChanged(auth, async (user) => {
     const booksRef = collection(db, "books");
 
     const q = query(
-      booksRef,
-      where("userId", "==", user.uid),
-      orderBy("updatedAt", "desc")
-    );
+  booksRef,
+  where("userId", "==", user.uid)
+);
 
     const snapshot = await getDocs(q);
 
