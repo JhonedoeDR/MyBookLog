@@ -498,3 +498,5 @@ if (!bookId) {
   });
 
 }
+
+console.log("detail.js 最後まで読み込みました");
