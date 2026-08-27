@@ -1,81 +1,96 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>新しいメモ│よみもの記録</title>
+<meta charset="UTF-8">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>新しいメモ│よみもの記録</title>
+
+<!-- Google Fonts -->
+<link
+  rel="preconnect"
+  href="https://fonts.googleapis.com"
+>
+<link
+  href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap"
+  rel="stylesheet"
+>
+
+<!-- このページ専用CSS -->
+<link
+  rel="stylesheet"
+  href="new.css"
+>
 </head>
-
 <body>
+<div class="frame">
 
+  <!-- ヘッダー -->
   <header>
-    <h1>新しいメモ</h1>
-
-    <button type="button" id="back-button">
+    <div class="brand">
+      新しいメモ
+      <span>NEW ENTRY</span>
+    </div>
+    <button
+      type="button"
+      class="icon-btn"
+      id="back-button"
+    >
       ホームに戻る
     </button>
   </header>
 
-
+  <!-- 本文 -->
   <main>
-
     <form id="book-form">
 
       <!-- 作品名 -->
-      <div>
+      <div class="form-group">
         <label for="title">作品名</label>
         <input type="text" id="title" required>
       </div>
 
-
       <!-- 著者 -->
-      <div>
+      <div class="form-group">
         <label for="author">著者・作者</label>
         <input type="text" id="author">
       </div>
 
-
       <!-- ジャンル -->
       <fieldset>
         <legend>ジャンル</legend>
-
         <label>
           <input type="checkbox" name="genre" value="ゲーム">
           ゲーム
         </label>
-
         <label>
           <input type="checkbox" name="genre" value="ドラマ">
           ドラマ
         </label>
-
         <label>
           <input type="checkbox" name="genre" value="映画">
           映画
         </label>
-
         <label>
           <input type="checkbox" name="genre" value="アニメ">
           アニメ
         </label>
-
         <label>
           <input type="checkbox" name="genre" value="小説">
           小説
         </label>
-
         <label>
           <input type="checkbox" name="genre" value="その他">
           その他
         </label>
       </fieldset>
 
-
       <!-- 進捗 -->
-      <div>
+      <div class="form-group">
         <label for="status">進捗</label>
-
         <select id="status">
           <option value="積読">積読</option>
           <option value="読書中">読書中</option>
@@ -83,59 +98,43 @@
         </select>
       </div>
 
-
       <!-- メモ -->
       <section>
-
-        <h2>メモ</h2>
+        <p class="section-label">メモ</p>
 
         <div id="memo-list">
-
           <!-- 最初のメモ -->
           <div class="memo-item">
-
             <input
               type="text"
               class="memo-label"
               value="メモ"
               placeholder="メモのタイトル"
             >
-
             <textarea
               class="memo-content"
               placeholder="内容"
             ></textarea>
-
             <button type="button" class="delete-memo-button">
               このメモを削除
             </button>
-
           </div>
-
         </div>
-
 
         <button type="button" id="add-memo-button">
           ＋ メモを追加
         </button>
-
       </section>
-
 
       <button type="submit">
         保存する
       </button>
-
     </form>
 
-
     <p id="message"></p>
-
   </main>
+</div>
 
-
-  <script type="module" src="new.js"></script>
-
+<script type="module" src="new.js"></script>
 </body>
-
 </html>
