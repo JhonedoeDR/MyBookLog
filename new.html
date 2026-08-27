@@ -105,19 +105,30 @@
         <div id="memo-list">
           <!-- 最初のメモ -->
           <div class="memo-item">
-            <input
-              type="text"
-              class="memo-label"
-              value="メモ"
-              placeholder="メモのタイトル"
-            >
-            <textarea
-              class="memo-content"
-              placeholder="内容"
-            ></textarea>
-            <button type="button" class="delete-memo-button">
-              このメモを削除
-            </button>
+            <div class="memo-header">
+              <input
+                type="text"
+                class="memo-label"
+                value="メモ"
+                placeholder="メモのタイトル"
+              >
+              <button
+                type="button"
+                class="toggle-memo-button"
+                aria-label="メモを開閉"
+              >
+                ▲
+              </button>
+            </div>
+            <div class="memo-body">
+              <textarea
+                class="memo-content"
+                placeholder="内容"
+              ></textarea>
+              <button type="button" class="delete-memo-button">
+                このメモを削除
+              </button>
+            </div>
           </div>
         </div>
 
