@@ -1,4 +1,4 @@
-import { app } from "./firebase-config.js";
+import { app } from "./Firebase-config.js";
 import {
   getAuth,
   signInWithEmailAndPassword,
