@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新しい読書メモ</title>
+</head>
+
+<body>
+
+  <header>
+    <h1>新しい読書メモ</h1>
+
+    <button type="button" id="back-button">
+      ホームに戻る
+    </button>
+  </header>
+
+
+  <main>
+
+    <form id="book-form">
+
+      <div>
+        <label for="title">作品名</label>
+        <input type="text" id="title" required>
+      </div>
+
+
+      <div>
+        <label for="author">著者・作者</label>
+        <input type="text" id="author">
+      </div>
+
+
+      <div>
+        <label for="genre">ジャンル</label>
+        <input type="text" id="genre">
+      </div>
+
+
+      <div>
+        <label for="status">進捗</label>
+
+        <select id="status">
+          <option value="積読">積読</option>
+          <option value="読書中">読書中</option>
+          <option value="読了">読了</option>
+        </select>
+      </div>
+
+
+      <div>
+        <label for="memo">メモ</label>
+        <textarea id="memo"></textarea>
+      </div>
+
+
+      <button type="submit">
+        保存する
+      </button>
+
+    </form>
+
+
+    <p id="message"></p>
+
+  </main>
+
+
+  <script type="module" src="new.js"></script>
+
+</body>
+
+</html>
