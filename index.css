@@ -1,9 +1,9 @@
 :root {
-  --siro: #e3e4e9;
-  --haiiro: #e5e4e6;
-  --kuro: #0d1b24;
-  --kurosoft: #2b2b2b;
-  --neon: #05f8e3;
+  --kurai: #272cla;
+  --choikura: #446158
+  --main: #9fd700;
+  --akarui: #fffeef;
+  
 }
 
 
@@ -16,7 +16,7 @@
 body {
   margin: 0;
   background: #d8d0bd;
-  color: var(--kuro);
+  color: var(--kurai);
 
   font-family:
     "Zen Kaku Gothic New",
@@ -37,7 +37,7 @@ body {
   width: 390px;
   min-height: 780px;
 
-  background: var(--siro);
+  background: var(--akarui);
 
   border-radius: 28px;
   overflow: hidden;
@@ -53,8 +53,8 @@ body {
 /* ヘッダー */
 
 header {
-  background: var(--kuro);
-  color: var(--siro);
+  background: var(--kurai);
+  color: var(--akarui);
 
   padding: 18px 16px 16px;
 
@@ -104,7 +104,7 @@ header {
 /* 新規作成ボタン */
 
 .btn-new-header {
-  background: var(--neon);
+  background: var(--main);
   color: #fff;
 
   border: none;
@@ -137,7 +137,7 @@ header {
   background:
     rgba(255, 255, 255, 0.06);
 
-  color: var(--siro);
+  color: var(--main);
 
   display: flex;
   align-items: center;
@@ -166,12 +166,12 @@ main {
   width: 100%;
 
   border:
-    1.5px dashed var(--neon);
+    1.5px dashed var(--choikura);
 
   background:
     rgba(59, 82, 73, 0.06);
 
-  color: var(--kuro);
+  color: var(--kurai);
 
   border-radius: 16px;
 
@@ -203,7 +203,7 @@ main {
 
   border-radius: 50%;
 
-  background: var(--neon);
+  background: var(--main);
   color: #fff;
 
   display: flex;
@@ -225,7 +225,7 @@ main {
 
   font-size: 13px;
 
-  color: var(--kurosoft);
+  color: var(--choikura);
 
   letter-spacing: 0.1em;
 
@@ -249,7 +249,7 @@ main {
 /* 読書カード */
 
 .book-card {
-  background: var(--haiiro);
+  background: var(--akarui);
 
   border-radius: 14px;
 
@@ -308,7 +308,7 @@ main {
   margin:
     0 12px 6px;
 
-  color: var(--kurosoft);
+  color: var(--kurai);
 }
 
 
@@ -326,7 +326,7 @@ main {
 
   text-align: center;
 
-  color: var(--kurosoft);
+  color: var(--kurai);
 
   font-size: 13px;
 
@@ -342,12 +342,12 @@ main {
 
   font-size: 11px;
 
-  color: var(--kurosoft);
+  color: var(--choikura);
 
   line-height: 1.6;
 
   border-top:
-    1px dashed var(--haiiro);
+    1px dashed var(--choikura);
 
   padding-top: 12px;
 }
@@ -359,7 +359,7 @@ main {
 
   body {
     padding: 0;
-    background: var(--siro);
+    background: var(--akarui);
   }
 
   .frame {
