@@ -28,8 +28,7 @@ form.addEventListener("submit", (event) => {
 
   signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value)
     .catch((error) => {
-      errorMessage.textContent = "ログインできませんでした。メールアドレスとパスワードを確認してください。";
-      console.error(error);
+      errorMessage.textContent = "ログインエラー: " + error.code + " / " + error.message;
     });
 });
 
@@ -39,7 +38,6 @@ signupButton.addEventListener("click", () => {
 
   createUserWithEmailAndPassword(auth, emailInput.value, passwordInput.value)
     .catch((error) => {
-      errorMessage.textContent = "アカウントを作成できませんでした。";
-      console.error(error);
+      errorMessage.textContent = "作成エラー: " + error.code + " / " + error.message;
     });
 });
