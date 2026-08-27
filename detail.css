@@ -1,0 +1,363 @@
+:root {
+  --kurai: #14518c;
+  --choikura: #bbc8d8;
+  --main: #c59630;
+  --akarui: #eaeff3;
+}
+
+/* 全体 */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #d8d0bd;
+  color: var(--kurai);
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px 0;
+}
+
+/* 全体の枠(index/newと共通) */
+.frame {
+  width: 390px;
+  min-height: 780px;
+  background: var(--akarui);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ヘッダー(index/newと共通) */
+header {
+  background: var(--kurai);
+  color: var(--akarui);
+  padding: 18px 16px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  font-family: "Shippori Mincho", serif;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.04em;
+}
+
+.brand span {
+  display: block;
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  color: #b9c4bc;
+  margin-top: 2px;
+}
+
+.icon-btn {
+  width: auto;
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--akarui);
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+/* 本文 */
+main {
+  padding: 18px 16px 32px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* セクション見出し(index/newと共通) */
+.section-label {
+  font-family: "Shippori Mincho", serif;
+  font-size: 13px;
+  color: var(--kurai);
+  letter-spacing: 0.1em;
+  margin: 20px 0 10px 2px;
+}
+
+/* ===== 表示モード ===== */
+
+#title {
+  font-family: "Shippori Mincho", serif;
+  font-size: 19px;
+  font-weight: 700;
+  margin: 4px 2px 4px;
+}
+
+#author {
+  font-size: 12px;
+  color: var(--kurai);
+  margin: 0 2px 12px;
+}
+
+#genre,
+#status {
+  font-size: 13px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin: 0;
+}
+
+.view-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+#edit-button,
+#delete-button {
+  flex: 1;
+  cursor: pointer;
+  padding: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  border-radius: 50px;
+}
+
+#edit-button {
+  background-color: var(--main);
+  color: #fff;
+  border: 1px solid black;
+  box-shadow: 4px 4px black;
+}
+
+#delete-button {
+  background: #fff;
+  color: #b0483f;
+  border: 1px solid #b0483f;
+}
+
+/* ===== メモ(表示・編集で共通のアコーディオン見た目) ===== */
+
+#memo-list,
+#edit-memo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.memo-item,
+.edit-memo-item {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 6px rgba(43, 38, 32, 0.15);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.memo-header,
+.edit-memo-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.memo-label-text {
+  flex: 1;
+  margin: 0;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--kurai);
+}
+
+.edit-memo-label {
+  flex: 1;
+  border: 1px solid var(--choikura);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--kurai);
+  font-family: "Zen Kaku Gothic New", sans-serif;
+}
+
+/* 開閉ボタン(new.cssと共通の見た目) */
+.toggle-memo-button {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--choikura);
+  background: var(--akarui);
+  color: var(--kurai);
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.memo-body,
+.edit-memo-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 閉じているとき本文を隠す */
+.memo-item.collapsed .memo-body,
+.edit-memo-item.collapsed .edit-memo-body {
+  display: none;
+}
+
+.memo-content-text {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--kurai);
+  white-space: pre-wrap;
+}
+
+.edit-memo-content {
+  border: 1px solid var(--choikura);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 13px;
+  min-height: 80px;
+  resize: vertical;
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  color: var(--kurai);
+}
+
+.delete-memo-button {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  color: #b0483f;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 4px 2px;
+}
+
+#add-edit-memo-button {
+  background: var(--choikura);
+  color: var(--kurai);
+  border: 1px solid var(--kurai);
+  border-radius: 50px;
+  padding: 9px 16px;
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  margin-bottom: 24px;
+}
+
+/* ===== 編集モードのフォーム ===== */
+
+#edit-mode .form-group {
+  margin-bottom: 16px;
+}
+
+#edit-mode label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--kurai);
+  margin-bottom: 6px;
+}
+
+#edit-mode input[type="text"],
+#edit-mode select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--choikura);
+  border-radius: 10px;
+  background: #fff;
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-size: 14px;
+  color: var(--kurai);
+}
+
+#edit-mode fieldset {
+  border: 1px solid var(--choikura);
+  border-radius: 12px;
+  padding: 12px 14px 14px;
+  margin: 0 0 16px;
+}
+
+#edit-mode legend {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--kurai);
+  padding: 0 4px;
+}
+
+#edit-mode fieldset label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--kurai);
+  margin: 4px 10px 0 0;
+}
+
+#edit-form > button[type="submit"] {
+  cursor: pointer;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  background-color: var(--main);
+  color: #fff;
+  border: 1px solid black;
+  border-radius: 50px;
+  box-shadow: 4px 4px black;
+  text-align: center;
+  width: 100%;
+  margin-top: 8px;
+}
+
+#cancel-edit-button {
+  cursor: pointer;
+  padding: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  background: #fff;
+  color: var(--kurai);
+  border: 1px solid var(--choikura);
+  border-radius: 50px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* エラー・お知らせメッセージ */
+#error-message {
+  margin: 14px 4px 0;
+  font-size: 12px;
+  color: var(--kurai);
+  text-align: center;
+}
+
+/* スマホ(index/newと共通) */
+@media (max-width: 420px) {
+  body {
+    padding: 0;
+    background: var(--akarui);
+  }
+
+  .frame {
+    width: 100%;
+    min-height: 100vh;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
