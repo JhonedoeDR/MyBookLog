@@ -170,12 +170,12 @@ main {
 #btn2 {
   cursor: pointer;
   margin: 32px;
-  padding: 20px 62px;
+  padding: 20px 74px;
   font-size: 15px;
   font-weight: 700;
   
   background-color: var(--main);
-  color: var(--akarui);
+  color: #fff;
   border: 1px solid black;
   border-radius: 50px;
   box-shadow: 4px 4px black;
