@@ -2,49 +2,145 @@
 <html lang="ja">
 
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
   <title>読書帖 - ホーム</title>
-  <link rel="stylesheet" href="index.css">
+
+
+  <!-- Google Fonts -->
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  >
+
+
+  <!-- このページ専用CSS -->
+
+  <link
+    rel="stylesheet"
+    href="index.css"
+  >
+
 </head>
+
 
 <body>
 
-  <header>
-    <h1>読書帖</h1>
-
-    <nav>
-      <button type="button" id="new-button">＋ 新規作成</button>
-      <button type="button" id="settings-button">設定</button>
-    </nav>
-  </header>
+  <div class="frame">
 
 
-  <main>
+    <!-- ヘッダー -->
 
-    <section>
-      <h2>読書メモ</h2>
+    <header>
 
-      <button type="button" id="create-button">
-        ＋ 新しい読書メモを作成する
+      <div class="brand">
+
+        読書帖
+
+        <span>
+          READING NOTES
+        </span>
+
+      </div>
+
+
+      <div class="header-actions">
+
+        <button
+          type="button"
+          class="btn-new-header"
+          id="new-button"
+        >
+          ＋ 新規作成
+        </button>
+
+
+        <button
+          type="button"
+          class="icon-btn"
+          id="settings-button"
+          aria-label="設定"
+        >
+          ⚙
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <!-- 本文 -->
+
+    <main>
+
+
+      <!-- 新規作成 -->
+
+      <button
+        type="button"
+        class="create-card"
+        id="create-button"
+      >
+
+        <span class="plus">
+          ＋
+        </span>
+
+        <span>
+          新しい読書メモを作成する
+        </span>
+
       </button>
-    </section>
 
 
-    <section>
-      <h2>最近の記録</h2>
+      <!-- 最近の記録 -->
 
-      <!-- Firestoreから取得した読書メモがここに入る -->
-      <div id="book-list"></div>
-
-      <!-- 読書メモが1件もないときに表示する -->
-      <p id="empty-message">まだ読書メモがありません。</p>
-    </section>
-
-  </main>
+      <p class="section-label">
+        最近の記録
+      </p>
 
 
-  <script type="module" src="index.js"></script>
+      <!-- JavaScriptがここにカードを生成する -->
+
+      <div id="book-list">
+
+        <p id="empty-message">
+          まだ読書メモがありません。
+        </p>
+
+      </div>
+
+
+      <!-- 説明 -->
+
+      <p class="note">
+        読書メモをタップすると詳細を確認できます。
+      </p>
+
+
+    </main>
+
+  </div>
+
+
+  <!-- JavaScript -->
+
+  <script
+    type="module"
+    src="index.js"
+  ></script>
 
 </body>
 
