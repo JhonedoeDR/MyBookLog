@@ -170,7 +170,7 @@ main {
 #btn2 {
   cursor: pointer;
   margin: 32px;
-  padding: 27px 37px;
+  padding: 27px 52px;
   font-size: 15px;
   
   background-color: var(--main);
