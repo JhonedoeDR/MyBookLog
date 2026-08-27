@@ -115,6 +115,12 @@ header {
   font-family:
     "Zen Kaku Gothic New",
     sans-serif;
+    
+    background-color: var(--main);
+  color: #fff;
+  border: 1px solid black;
+  border-radius: 50px;
+  box-shadow: 4px 4px black;
 
   font-weight: 700;
   font-size: 13px;
@@ -144,6 +150,10 @@ header {
   font-family:
     "Zen Kaku Gothic New",
     sans-serif;
+    
+  border: 1px solid black;
+  border-radius: 50px;
+  box-shadow: 4px 4px black;
 
   font-weight: 700;
   font-size: 13px;
