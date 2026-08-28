@@ -237,6 +237,23 @@ main {
     0 0 10px 2px;
 }
 
+..section-label span {
+    position: relative;
+    z-index: 2;
+  }
+  
+  .section-label::before{
+  content: attr(data-en);
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--main)(229 192 70 / .3);
+  font-size: 34px;
+  font-family: "Shippori Mincho",
+    serif;
+    z-index: 1;
+    }
 
 /* 読書カード一覧 */
 
