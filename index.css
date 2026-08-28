@@ -223,8 +223,11 @@ main {
   font-family:
     "Shippori Mincho",
     serif;
-
-  font-size: 13px;
+    position: relative;
+    padding-top: 30px;
+    padding-bottom: 28px;
+    font-size: 13px;
+    text-align: center;
 
   color: var(--kurai);
 
