@@ -237,7 +237,7 @@ main {
     0 0 10px 2px;
 }
 
-..section-label span {
+.section-label span {
     position: relative;
     z-index: 2;
   }
@@ -248,7 +248,7 @@ main {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  color: var(--main)(229 192 70 / 0.03);
+  color: rgb(229 192 70 / 0.03);
   font-size: 34px;
   font-family: "Shippori Mincho",
     serif;
