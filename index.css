@@ -272,7 +272,7 @@ main {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  color: rgb(20 80 140 / 0.4);
+  color: rgb(20 80 140 / 0.1);
   font-size: 34px;
   font-family: "Shippori Mincho",
     serif;
