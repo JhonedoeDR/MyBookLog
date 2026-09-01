@@ -175,25 +175,57 @@ main {
 
 .left-card {
   display: flex;
-  justify-content: center;   /* 横方向の中央 */
-
+  justify-content: center;
 }
 
 #btn2 {
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+
   margin: 32px;
-  padding: 18px 83px;
+  padding: 18px 60px 18px 30px; /* 右側を広めにして矢印スペース確保 */
+  width: 260px; /* 元の見た目の横幅に合わせて調整してOK */
+
   font-size: 15px;
   font-weight: 700;
-  
-  background-color: var(--main);
   color: #fff;
+  text-align: left;
+
+  background-color: var(--main);
   border: 1px solid black;
   border-radius: 50px;
   box-shadow: 4px 4px black;
-  text-align: center;
-  
 }
+
+/* 矢印の背景の丸 */
+#btn2::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+}
+
+/* 矢印本体 */
+#btn2::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 32px;
+  transform: translateY(-50%) rotate(45deg);
+  width: 6px;
+  height: 6px;
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+}
+
 
 
 /* ＋の丸 */
