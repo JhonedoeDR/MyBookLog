@@ -113,35 +113,30 @@
       <section>
         <p class="section-label">メモ</p>
 
-        <div id="memo-list">
-          <!-- 最初のメモ -->
-          <div class="memo-item">
-            <div class="memo-header">
-              <input
-                type="text"
-                class="memo-label"
-                value="メモ"
-                placeholder="メモのタイトル"
-              >
-              <button
-                type="button"
-                class="toggle-memo-button"
-                aria-label="メモを開閉"
-              >
-                ▲
-              </button>
-            </div>
-            <div class="memo-body">
-              <textarea
-                class="memo-content"
-                placeholder="内容"
-              ></textarea>
-              <button type="button" class="delete-memo-button">
-                このメモを削除
-              </button>
-            </div>
-          </div>
-        </div>
+      <div id="memo-list">
+  <!-- 最初のメモ -->
+  <div class="memo-item collapsed">
+    <div class="memo-header">
+      <input
+        type="text"
+        class="memo-label"
+        value="メモ"
+        placeholder="メモのタイトル"
+      >
+      <button type="button" class="toggle-memo-button">▼</button>
+    </div>
+    <div class="memo-body">
+      <textarea
+        class="memo-content"
+        placeholder="内容"
+      ></textarea>
+      <button type="button" class="delete-memo-button">
+        このメモを削除
+      </button>
+    </div>
+  </div>
+ </div>
+
 
         <button type="button" id="add-memo-button">
           ＋ メモを追加
