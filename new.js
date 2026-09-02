@@ -38,28 +38,24 @@ backButton.addEventListener("click", () => {
 // メモを1個追加する
 addMemoButton.addEventListener("click", () => {
   const memoItem = document.createElement("div");
-  memoItem.className = "memo-item collapsed";
+  memoItem.className = "memo-item";
   memoItem.innerHTML = `
-    <div class="memo-header">
-      <input
-        type="text"
-        class="memo-label"
-        placeholder="メモのタイトル"
-      >
-      <button type="button" class="toggle-memo-button">▼</button>
-    </div>
-    <div class="memo-body">
-      <textarea
-        class="memo-content"
-        placeholder="内容"
-      ></textarea>
-      <button type="button" class="delete-memo-button">
-        このメモを削除
-      </button>
-    </div>
+    <input
+      type="text"
+      class="memo-label"
+      placeholder="メモのタイトル"
+    >
+    <textarea
+      class="memo-content"
+      placeholder="内容"
+    ></textarea>
+    <button type="button" class="delete-memo-button">
+      このメモを削除
+    </button>
   `;
   memoList.appendChild(memoItem);
 });
+
 
 
 // メモの開閉
