@@ -38,7 +38,7 @@ backButton.addEventListener("click", () => {
 // メモを1個追加する
 addMemoButton.addEventListener("click", () => {
   const memoItem = document.createElement("div");
-  memoItem.className = "memo-item";
+  memoItem.className = "memo-item collapsed";
   memoItem.innerHTML = `
     <div class="memo-header">
       <input
@@ -46,9 +46,7 @@ addMemoButton.addEventListener("click", () => {
         class="memo-label"
         placeholder="メモのタイトル"
       >
-      <button type="button" class="toggle-memo-button" aria-label="メモを開閉">
-        ▲
-      </button>
+      <button type="button" class="toggle-memo-button">▼</button>
     </div>
     <div class="memo-body">
       <textarea
@@ -62,6 +60,7 @@ addMemoButton.addEventListener("click", () => {
   `;
   memoList.appendChild(memoItem);
 });
+
 
 // メモの開閉
 memoList.addEventListener("click", (event) => {
