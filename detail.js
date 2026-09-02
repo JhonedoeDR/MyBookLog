@@ -140,34 +140,37 @@ function displayBook(book) {
   }
 
   book.memoSections.forEach((memo) => {
-    const article = document.createElement("article");
-    article.className = "memo-item";
+  const memoItem = document.createElement("div");
+  memoItem.className = "memo-item collapsed";
 
-    const header = document.createElement("div");
-    header.className = "memo-header";
+  const header = document.createElement("div");
+  header.className = "memo-header";
 
-    const h3 = document.createElement("h3");
-    h3.className = "memo-label-text";
-    h3.textContent = memo.label || "無題";
+  const labelText = document.createElement("p");
+  labelText.className = "memo-label-text";
+  labelText.textContent = memo.label || "無題";
 
-    const toggleButton = createToggleButton(article, "memo-body");
+  const toggleButton = document.createElement("button");
+  toggleButton.type = "button";
+  toggleButton.className = "toggle-memo-button";
+  toggleButton.textContent = "▼";
 
-    header.appendChild(h3);
-    header.appendChild(toggleButton);
+  header.appendChild(labelText);
+  header.appendChild(toggleButton);
 
-    const body = document.createElement("div");
-    body.className = "memo-body";
+  const body = document.createElement("div");
+  body.className = "memo-body";
 
-    const p = document.createElement("p");
-    p.className = "memo-content-text";
-    p.textContent = memo.content || "";
+  const contentText = document.createElement("p");
+  contentText.className = "memo-content-text";
+  contentText.textContent = memo.content || "";
 
-    body.appendChild(p);
+  body.appendChild(contentText);
 
-    article.appendChild(header);
-    article.appendChild(body);
-    memoList.appendChild(article);
-  });
+  memoItem.appendChild(header);
+  memoItem.appendChild(body);
+  memoList.appendChild(memoItem);
+ });
 }
 
 // 編集画面を開く
@@ -206,6 +209,16 @@ editButton.onclick = () => {
   viewMode.hidden = true;
   editMode.hidden = false;
 };
+
+// メモの開閉(タップで開く/閉じる)
+memoList.addEventListener("click", (event) => {
+  if (!event.target.classList.contains("toggle-memo-button")) {
+    return;
+  }
+  const memoItem = event.target.closest(".memo-item");
+  memoItem.classList.toggle("collapsed");
+});
+
 
 // 編集をキャンセル
 cancelEditButton.onclick = () => {
