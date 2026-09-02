@@ -84,6 +84,26 @@ memoList.addEventListener("click", (event) => {
   memoItem.remove();
 });
 
+// メモの開閉(タップで開く/閉じる)
+memoList.addEventListener("click", (event) => {
+  if (!event.target.classList.contains("toggle-memo-button")) {
+    return;
+  }
+  const memoItem = event.target.closest(".memo-item");
+  memoItem.classList.toggle("collapsed");
+});
+
+// メモ欄を入力内容に合わせて自動で高さを広げる(見返しやすくする)
+memoList.addEventListener("input", (event) => {
+  if (!event.target.classList.contains("memo-content")) {
+    return;
+  }
+  const textarea = event.target;
+  textarea.style.height = "auto";
+  textarea.style.height = textarea.scrollHeight + "px";
+});
+
+
 // 保存
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
