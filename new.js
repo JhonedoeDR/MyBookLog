@@ -134,3 +134,119 @@ form.addEventListener("submit", async (event) => {
       "保存できませんでした: " + error.message;
   }
 });
+
+// --- 資料スキャン(カメラ + OCR) ---
+const scanButton = document.getElementById("scan-button");
+const scanModal = document.getElementById("scan-modal");
+const scanVideo = document.getElementById("scan-video");
+const scanCanvas = document.getElementById("scan-canvas");
+const captureButton = document.getElementById("capture-button");
+const closeScanButton = document.getElementById("close-scan-button");
+const scanStatus = document.getElementById("scan-status");
+const scanResult = document.getElementById("scan-result");
+const copyResultButton = document.getElementById("copy-result-button");
+const addToMemoButton = document.getElementById("add-to-memo-button");
+
+let cameraStream = null;
+
+// カメラを起動してモーダルを開く
+scanButton.addEventListener("click", async () => {
+  scanModal.classList.remove("hidden");
+  scanResult.value = "";
+  scanStatus.textContent = "";
+
+  try {
+    cameraStream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "environment" }
+    });
+    scanVideo.srcObject = cameraStream;
+  } catch (error) {
+    console.error("カメラ起動エラー:", error);
+    scanStatus.textContent =
+      "カメラを起動できませんでした: " + error.message;
+  }
+});
+
+// カメラを止める
+function stopCamera() {
+  if (cameraStream) {
+    cameraStream.getTracks().forEach((track) => track.stop());
+    cameraStream = null;
+  }
+}
+
+// モーダルを閉じる
+closeScanButton.addEventListener("click", () => {
+  stopCamera();
+  scanModal.classList.add("hidden");
+});
+
+// 撮影してOCRを実行
+captureButton.addEventListener("click", async () => {
+  if (!cameraStream) {
+    scanStatus.textContent = "カメラが起動していません。";
+    return;
+  }
+
+  const width = scanVideo.videoWidth;
+  const height = scanVideo.videoHeight;
+  scanCanvas.width = width;
+  scanCanvas.height = height;
+  scanCanvas.getContext("2d").drawImage(scanVideo, 0, 0, width, height);
+
+  scanStatus.textContent = "文字を読み取っています…";
+  captureButton.disabled = true;
+
+  try {
+    const { data } = await Tesseract.recognize(scanCanvas, "jpn+eng");
+    scanResult.value = data.text.trim();
+    scanStatus.textContent = "読み取りが完了しました。";
+  } catch (error) {
+    console.error("OCRエラー:", error);
+    scanStatus.textContent = "読み取りに失敗しました: " + error.message;
+  } finally {
+    captureButton.disabled = false;
+  }
+});
+
+// クリップボードにコピー
+copyResultButton.addEventListener("click", async () => {
+  if (!scanResult.value) {
+    return;
+  }
+  try {
+    await navigator.clipboard.writeText(scanResult.value);
+    scanStatus.textContent = "コピーしました。";
+  } catch (error) {
+    console.error("コピーエラー:", error);
+    scanStatus.textContent = "コピーできませんでした: " + error.message;
+  }
+});
+
+// 読み取った文章を新しいメモとして追加
+addToMemoButton.addEventListener("click", () => {
+  if (!scanResult.value) {
+    return;
+  }
+
+  const memoItem = document.createElement("div");
+  memoItem.className = "memo-item";
+  memoItem.innerHTML = `
+    <input
+      type="text"
+      class="memo-label"
+      value="スキャンしたメモ"
+      placeholder="メモのタイトル"
+    >
+    <textarea class="memo-content"></textarea>
+    <button type="button" class="delete-memo-button">
+      このメモを削除
+    </button>
+  `;
+  memoItem.querySelector(".memo-content").value = scanResult.value;
+  memoList.appendChild(memoItem);
+
+  stopCamera();
+  scanModal.classList.add("hidden");
+});
+
