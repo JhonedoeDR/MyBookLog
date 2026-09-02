@@ -371,3 +371,84 @@ if (!bookId) {
     }
   });
 }
+
+const scanButton = document.getElementById("scan-button");
+const scanModal = document.getElementById("scan-modal");
+const scanVideo = document.getElementById("scan-video");
+const scanCanvas = document.getElementById("scan-canvas");
+const captureButton = document.getElementById("capture-button");
+const closeScanButton = document.getElementById("close-scan-button");
+const scanStatus = document.getElementById("scan-status");
+const scanResult = document.getElementById("scan-result");
+const copyResultButton = document.getElementById("copy-result-button");
+const addToMemoButton = document.getElementById("add-to-memo-button");
+
+let cameraStream = null;
+
+scanButton.addEventListener("click", async () => {
+  scanModal.classList.remove("hidden");
+  scanResult.value = "";
+  scanStatus.textContent = "";
+  try {
+    cameraStream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "environment" }
+    });
+    scanVideo.srcObject = cameraStream;
+  } catch (error) {
+    scanStatus.textContent = "カメラを起動できませんでした: " + error.message;
+  }
+});
+
+function stopCamera() {
+  if (cameraStream) {
+    cameraStream.getTracks().forEach((track) => track.stop());
+    cameraStream = null;
+  }
+}
+
+closeScanButton.addEventListener("click", () => {
+  stopCamera();
+  scanModal.classList.add("hidden");
+});
+
+captureButton.addEventListener("click", async () => {
+  if (!cameraStream) {
+    scanStatus.textContent = "カメラが起動していません。";
+    return;
+  }
+  const width = scanVideo.videoWidth;
+  const height = scanVideo.videoHeight;
+  scanCanvas.width = width;
+  scanCanvas.height = height;
+  scanCanvas.getContext("2d").drawImage(scanVideo, 0, 0, width, height);
+
+  scanStatus.textContent = "文字を読み取っています…";
+  captureButton.disabled = true;
+
+  try {
+    const { data } = await Tesseract.recognize(scanCanvas, "jpn+eng");
+    scanResult.value = data.text.trim();
+    scanStatus.textContent = "読み取りが完了しました。";
+  } catch (error) {
+    scanStatus.textContent = "読み取りに失敗しました: " + error.message;
+  } finally {
+    captureButton.disabled = false;
+  }
+});
+
+copyResultButton.addEventListener("click", async () => {
+  if (!scanResult.value) return;
+  try {
+    await navigator.clipboard.writeText(scanResult.value);
+    scanStatus.textContent = "コピーしました。";
+  } catch (error) {
+    scanStatus.textContent = "コピーできませんでした: " + error.message;
+  }
+});
+
+addToMemoButton.addEventListener("click", () => {
+  if (!scanResult.value) return;
+  addMemoEditor("スキャンしたメモ", scanResult.value);
+  stopCamera();
+  scanModal.classList.add("hidden");
+});
