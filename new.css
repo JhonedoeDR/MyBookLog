@@ -379,3 +379,13 @@ fieldset label {
   text-align: center;
   margin: 0;
 }
+
+/* 開いているときは開閉ボタンを反転させる */
+.memo-item:not(.collapsed) .toggle-memo-button {
+  transform: rotate(180deg);
+}
+
+/* 自動で高さが伸びる際のちらつき防止 */
+.memo-item .memo-content {
+  overflow: hidden;
+}
