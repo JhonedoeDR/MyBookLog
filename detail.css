@@ -451,3 +451,8 @@ main {
   text-align: center;
   margin: 0;
 }
+
+.edit-memo-content {
+  overflow: hidden;
+}
+
