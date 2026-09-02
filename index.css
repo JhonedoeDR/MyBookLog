@@ -294,7 +294,7 @@ main {
 /* 読書カード */
 
 .book-card {
-  background: var(--akarui);
+  background: #EDF3F7;
 
   border-radius: 14px;
 
