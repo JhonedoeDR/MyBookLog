@@ -2,39 +2,21 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>読書メモ│よみもの記録</title>
 
-<!-- アイコン -->
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#14518c">
 
-
-<title>既存のメモ│よみもの記録</title>
-
-<!-- Google Fonts -->
-<link
-  rel="preconnect"
-  href="https://fonts.googleapis.com"
->
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link
   href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap"
   rel="stylesheet"
 >
-
-<!-- このページ専用CSS -->
-<link
-  rel="stylesheet"
-  href="detail.css"
->
-
-<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
-
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="frame">
@@ -44,147 +26,38 @@
       読書メモ
       <span>DETAIL</span>
     </div>
-    <button type="button" class="icon-btn" id="back-button">
-      ホームに戻る
-    </button>
+    <button type="button" class="icon-btn" id="back-button">ホームに戻る</button>
   </header>
 
   <main>
     <!-- 表示モード -->
     <section id="view-mode">
-      <h1 id="title">読み込み中...</h1>
-      <p id="author"></p>
+      <h1 class="book-title" id="view-title">読み込み中...</h1>
+      <p class="book-author" id="view-author"></p>
 
-      <div class="form-group">
-        <p class="section-label">ジャンル</p>
-        <p id="genre"></p>
-      </div>
+      <p class="section-label">ジャンル</p>
+      <p class="info-box" id="view-genre"></p>
 
-      <div class="form-group">
-        <p class="section-label">進捗</p>
-        <p id="status"></p>
-      </div>
+      <p class="section-label">進捗</p>
+      <p class="info-box" id="view-status"></p>
 
-      <section>
-        <p class="section-label">メモ</p>
-        <div id="memo-list"></div>
-      </section>
+      <p class="section-label">メモ</p>
+      <div id="view-memos"></div>
 
       <div class="view-actions">
-        <button type="button" id="edit-button">
-          編集
-        </button>
-        <button type="button" id="delete-button">
-          削除
-        </button>
+        <button type="button" class="btn-main" id="edit-button" disabled>編集</button>
+        <button type="button" class="btn-danger" id="delete-button" disabled>削除</button>
       </div>
     </section>
 
     <!-- 編集モード -->
-    <section id="edit-mode" hidden>
-      <p class="section-label">読書メモを編集</p>
+    <div id="editor" hidden></div>
 
-      <form id="edit-form">
-
-        <div class="form-group">
-          <label for="edit-title">作品名</label>
-          <input type="text" id="edit-title" required>
-        </div>
-
-        <div class="form-group">
-          <label for="edit-author">著者</label>
-          <input type="text" id="edit-author">
-        </div>
-
-        <fieldset>
-          <legend>ジャンル</legend>
-          <label>
-            <input type="checkbox" name="edit-genre" value="ゲーム">
-            ゲーム
-          </label>
-          <label>
-            <input type="checkbox" name="edit-genre" value="ドラマ">
-            ドラマ
-          </label>
-          <label>
-            <input type="checkbox" name="edit-genre" value="映画">
-            映画
-          </label>
-          <label>
-            <input type="checkbox" name="edit-genre" value="アニメ">
-            アニメ
-          </label>
-          <label>
-            <input type="checkbox" name="edit-genre" value="小説">
-            小説
-          </label>
-          <label>
-            <input type="checkbox" name="edit-genre" value="その他">
-            その他
-          </label>
-        </fieldset>
-
-        <div class="form-group">
-          <label for="edit-status">進捗</label>
-          <select id="edit-status">
-            <option value="積読">積読</option>
-            <option value="読書中">読書中</option>
-            <option value="読了">読了</option>
-          </select>
-        </div>
-
-        <section>
-          <p class="section-label">メモ</p>
-          <div id="edit-memo-list"></div>
-          <button
-            type="button"
-            id="add-edit-memo-button"
-          >
-            ＋ メモを追加
-          </button>
-        </section>
-        
-        <button type="button" id="scan-button">
-資料をスキャンして読み取る
-        </button>
-
-
-        <button type="submit">
-          保存する
-        </button>
-        <button
-          type="button"
-          id="cancel-edit-button"
-        >
-          キャンセル
-        </button>
-      </form>
-    </section>
-
-    <p id="error-message"></p>
+    <p class="message" id="notice"></p>
   </main>
+
 </div>
 
-<script type="module" src="./detail.js"></script>
-
-<div id="scan-modal" class="scan-modal hidden">
-  <div class="scan-modal-inner">
-    <h2>資料を読み取る</h2>
-    <video id="scan-video" autoplay playsinline></video>
-    <canvas id="scan-canvas" class="hidden"></canvas>
-    <div class="scan-buttons">
-      <button type="button" id="capture-button">撮影する</button>
-      <button type="button" id="close-scan-button">閉じる</button>
-    </div>
-    <p id="scan-status"></p>
-    <textarea id="scan-result" placeholder="読み取った文章がここに表示されます"></textarea>
-    <div class="scan-buttons">
-      <button type="button" id="copy-result-button">コピーする</button>
-      <button type="button" id="add-to-memo-button">メモに追加する</button>
-    </div>
-  </div>
-</div>
-
-
+<script type="module" src="detail.js"></script>
 </body>
 </html>
