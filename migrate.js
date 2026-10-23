@@ -97,3 +97,6 @@ importButton.addEventListener("click", async () => {
     message.textContent = "取り込めませんでした: " + error.message;
   }
 });
+
+// このファイルが最後まで読み込まれた印
+window.migrateReady = true;
