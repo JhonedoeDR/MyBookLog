@@ -13,6 +13,11 @@ function todayText() {
   return d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate());
 }
 
+// 以前のメモを取り込むページへ
+document.getElementById("migrate-button").addEventListener("click", () => {
+  window.location.href = "migrate.html";
+});
+
 // バックアップを保存する(ファイルをダウンロード)
 document.getElementById("export-button").addEventListener("click", () => {
   try {
