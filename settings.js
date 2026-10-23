@@ -1,77 +1,55 @@
-import { app } from "./firebase-config.js";
+import { exportJson, importJson } from "./storage.js";
 
-import {
-  getAuth,
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+const message = document.getElementById("message");
+const importFile = document.getElementById("import-file");
 
+document.getElementById("back-button").addEventListener("click", () => {
+  window.location.href = "index.html";
+});
 
-const auth = getAuth(app);
+function todayText() {
+  const d = new Date();
+  const pad = (n) => String(n).padStart(2, "0");
+  return d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate());
+}
 
+// バックアップを保存する(ファイルをダウンロード)
+document.getElementById("export-button").addEventListener("click", () => {
+  try {
+    const blob = new Blob([exportJson()], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
 
-const emailElement =
-  document.getElementById("email");
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "yomimono-backup-" + todayText() + ".json";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
 
-const logoutButton =
-  document.getElementById("logout-button");
-
-const backButton =
-  document.getElementById("back-button");
-
-const message =
-  document.getElementById("message");
-
-
-// ログイン状態を確認
-onAuthStateChanged(auth, (user) => {
-
-  if (!user) {
-
-    window.location.href =
-      "login.html";
-
-    return;
+    setTimeout(() => URL.revokeObjectURL(url), 10000);
+    message.textContent = "バックアップを保存しました。";
+  } catch (error) {
+    console.error("バックアップ保存エラー:", error);
+    message.textContent = "バックアップを保存できませんでした: " + error.message;
   }
-
-
-  // メールアドレスを表示
-  emailElement.textContent =
-    user.email || "未設定";
-
 });
 
-
-// ホームに戻る
-backButton.addEventListener("click", () => {
-
-  window.location.href =
-    "index.html";
-
+// バックアップから戻す
+document.getElementById("import-button").addEventListener("click", () => {
+  importFile.click();
 });
 
-
-// ログアウト
-logoutButton.addEventListener("click", async () => {
+importFile.addEventListener("change", async () => {
+  const file = importFile.files[0];
+  if (!file) return;
 
   try {
-
-    await signOut(auth);
-
-    window.location.href =
-      "login.html";
-
+    const count = importJson(await file.text());
+    message.textContent = count + "件のメモを戻しました。";
   } catch (error) {
-
-    console.error(
-      "ログアウトエラー:",
-      error
-    );
-
-    message.textContent =
-      "ログアウトできませんでした: " +
-      error.message;
-
+    console.error("バックアップ読み込みエラー:", error);
+    message.textContent = "戻せませんでした: " + error.message;
+  } finally {
+    importFile.value = "";
   }
-
 });
