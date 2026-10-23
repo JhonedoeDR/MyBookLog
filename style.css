@@ -1,0 +1,627 @@
+:root {
+  --kurai: #14518c;
+  --choikura: #bbc8d8;
+  --main: #c59630;
+  --akarui: #eaeff3;
+  --danger: #b0483f;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #d8d0bd;
+  color: var(--kurai);
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px 0;
+}
+
+/* ===== 枠・ヘッダー ===== */
+
+.frame {
+  width: 390px;
+  min-height: 780px;
+  background: var(--akarui);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background: var(--kurai);
+  color: var(--akarui);
+  padding: 18px 16px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  font-family: "Shippori Mincho", serif;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.04em;
+}
+
+.brand span {
+  display: block;
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  color: #b9c4bc;
+  margin-top: 2px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+main {
+  padding: 18px 16px 40px;
+  flex: 1;
+}
+
+/* ===== ボタン ===== */
+
+button {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.icon-btn {
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--akarui);
+  font-weight: 700;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.btn-new-header {
+  background: var(--main);
+  color: #fff;
+  border: 1px solid black;
+  border-radius: 50px;
+  box-shadow: 4px 4px black;
+  padding: 9px 16px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.btn-main {
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  background: var(--main);
+  color: #fff;
+  border: 1px solid black;
+  border-radius: 50px;
+  box-shadow: 4px 4px black;
+  text-align: center;
+}
+
+.btn-sub {
+  background: var(--choikura);
+  color: var(--kurai);
+  border: 1px solid var(--kurai);
+  border-radius: 50px;
+  padding: 9px 16px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.btn-danger {
+  background: #fff;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  border-radius: 50px;
+  padding: 12px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.btn-cancel {
+  background: #fff;
+  color: var(--kurai);
+  border: 1px solid var(--choikura);
+  border-radius: 50px;
+  padding: 12px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* ===== 見出し・メッセージ ===== */
+
+.section-label {
+  font-family: "Shippori Mincho", serif;
+  font-size: 13px;
+  color: var(--kurai);
+  letter-spacing: 0.1em;
+  margin: 20px 0 10px 2px;
+}
+
+.section-label[data-en] {
+  position: relative;
+  padding: 30px 0 28px;
+  text-align: center;
+  margin: 0 0 10px 2px;
+}
+
+.section-label[data-en] span {
+  position: relative;
+  z-index: 2;
+}
+
+.section-label[data-en]::before {
+  content: attr(data-en);
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgb(20 80 140 / 0.1);
+  font-size: 34px;
+  z-index: 1;
+}
+
+.message {
+  margin: 14px 4px 0;
+  font-size: 12px;
+  color: var(--kurai);
+  text-align: center;
+  min-height: 14px;
+  overflow-wrap: anywhere;
+}
+
+/* ===== ホーム ===== */
+
+.left-card {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-big {
+  position: relative;
+  margin: 24px 0 8px;
+  padding: 18px 30px;
+  width: 260px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  background: var(--main);
+  border: 1px solid black;
+  border-radius: 50px;
+  box-shadow: 4px 4px black;
+}
+
+.btn-big::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  width: 26px;
+  height: 26px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+}
+
+.btn-big::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 22px;
+  transform: translateY(-50%) rotate(45deg);
+  width: 6px;
+  height: 6px;
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+}
+
+#book-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.book-card {
+  background: #edf3f7;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(43, 38, 32, 0.25);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.book-card:active {
+  transform: scale(0.98);
+  box-shadow: 0 1px 3px rgba(43, 38, 32, 0.12);
+}
+
+.book-card h3 {
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.4;
+  margin: 0;
+  padding: 14px 12px 8px;
+  overflow-wrap: anywhere;
+}
+
+.book-card p {
+  font-size: 11px;
+  line-height: 1.5;
+  margin: 0 12px 6px;
+}
+
+.book-card p:last-child {
+  margin-bottom: 14px;
+}
+
+#empty-message,
+#list-error {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 13px;
+  padding: 30px 10px;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.note {
+  margin: 18px 4px 0;
+  font-size: 11px;
+  line-height: 1.6;
+  border-top: 1px dashed var(--choikura);
+  padding-top: 12px;
+}
+
+/* ===== フォーム共通 ===== */
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-size: 16px; /* iPhoneで入力時に拡大されないよう16px */
+  color: var(--kurai);
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--choikura);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: 2px solid var(--main);
+  outline-offset: 1px;
+}
+
+fieldset {
+  border: 1px solid var(--choikura);
+  border-radius: 12px;
+  padding: 12px 14px 14px;
+  margin: 0 0 16px;
+}
+
+legend {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 0 4px;
+}
+
+fieldset label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  margin: 4px 10px 0 0;
+}
+
+/* ===== 編集フォーム ===== */
+
+#book-form {
+  display: flex;
+  flex-direction: column;
+}
+
+#book-form > .btn-main {
+  margin-top: 8px;
+}
+
+#book-form > .btn-cancel {
+  margin-top: 10px;
+}
+
+.form-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+/* ===== メモ(表示・編集 共通) ===== */
+
+#memo-list,
+#view-memos {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.memo-item {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 6px rgba(43, 38, 32, 0.15);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.memo-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.memo-label {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid var(--choikura);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-weight: 700;
+}
+
+.memo-label-text {
+  flex: 1;
+  margin: 0;
+  font-weight: 700;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.toggle-memo-button {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--choikura);
+  background: var(--akarui);
+  color: var(--kurai);
+  font-size: 11px;
+  transition: transform 0.15s ease;
+}
+
+/* 開いているときは矢印を反転 */
+.memo-item:not(.collapsed) .toggle-memo-button {
+  transform: rotate(180deg);
+}
+
+.memo-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.memo-item.collapsed .memo-body {
+  display: none;
+}
+
+.memo-content {
+  border: 1px solid var(--choikura);
+  border-radius: 8px;
+  padding: 8px 10px;
+  min-height: 80px;
+  resize: none;
+  overflow: hidden;
+}
+
+.memo-content-text {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.delete-memo-button {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  color: var(--danger);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 2px;
+}
+
+/* ===== 詳細(表示モード) ===== */
+
+.book-title {
+  font-family: "Shippori Mincho", serif;
+  font-size: 19px;
+  font-weight: 700;
+  margin: 4px 2px;
+  overflow-wrap: anywhere;
+}
+
+.book-author {
+  font-size: 12px;
+  margin: 0 2px 12px;
+}
+
+.info-box {
+  font-size: 13px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin: 0;
+}
+
+.view-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.view-actions button {
+  flex: 1;
+}
+
+/* ===== 設定 ===== */
+
+.settings-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 6px rgba(43, 38, 32, 0.15);
+  padding: 14px 16px;
+}
+
+.settings-card p {
+  margin: 0;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.mt-28 {
+  margin-top: 28px;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.settings-note {
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 10px 4px 0;
+}
+
+/* ===== スキャン ===== */
+
+.scan-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.scan-modal-inner {
+  background: var(--akarui);
+  border-radius: 20px;
+  padding: 16px;
+  width: 90%;
+  max-width: 360px;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.scan-modal-inner h2 {
+  font-family: "Shippori Mincho", serif;
+  font-size: 16px;
+  margin: 0;
+}
+
+#scan-video {
+  width: 100%;
+  border-radius: 10px;
+  background: #000;
+}
+
+.scan-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.scan-buttons button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 50px;
+  border: 1px solid var(--kurai);
+  background: var(--choikura);
+  color: var(--kurai);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+#scan-result {
+  border: 1px solid var(--choikura);
+  border-radius: 8px;
+  padding: 8px 10px;
+  min-height: 100px;
+  resize: vertical;
+}
+
+#scan-status {
+  font-size: 12px;
+  text-align: center;
+  margin: 0;
+}
+
+/* ===== スマホ ===== */
+
+@media (max-width: 420px) {
+  body {
+    padding: 0;
+    background: var(--akarui);
+  }
+
+  .frame {
+    width: 100%;
+    min-height: 100vh;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
